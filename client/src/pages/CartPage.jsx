@@ -15,7 +15,7 @@ export default function CartPage() {
     const fetchCartItems = async () => {
       try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch('http://localhost:5000/api/cart', {
+        const response = await fetch('https://iwb-cloud-app.onrender.com/api/cart', {
           method: 'GET',
           headers: { 'Authorization': `Bearer ${token}` },
         });
@@ -47,7 +47,7 @@ export default function CartPage() {
   const removeFromCart = async (itemId) => {
     const token = localStorage.getItem('authToken');
     try {
-      const res = await fetch(`http://localhost:5000/api/cart/${itemId}`, {
+      const res = await fetch(`https://iwb-cloud-app.onrender.com/api/cart/${itemId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` },
       });
@@ -73,7 +73,7 @@ export default function CartPage() {
     }
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch('http://localhost:5000/api/purchase', {
+      const response = await fetch('https://iwb-cloud-app.onrender.com/api/purchase', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ export default function CartPage() {
   const fetchPurchaseHistory = async () => {
     const token = localStorage.getItem('authToken');
     try {
-      const response = await fetch('http://localhost:5000/api/purchase/history', {
+      const response = await fetch('https://iwb-cloud-app.onrender.com/api/purchase/history', {
         method: 'GET',
         headers: { 'Authorization': `Bearer ${token}` },
       });

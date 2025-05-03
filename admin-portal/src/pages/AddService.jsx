@@ -15,14 +15,14 @@ export default function AddService() {
 
     try {
       const response = editServiceId
-        ? await fetch(`http://localhost:5000/api/services/${editServiceId}`, {
+        ? await fetch(`https://iwb-cloud-app.onrender.com/api/services/${editServiceId}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(newService),
           })
-        : await fetch('http://localhost:5000/api/services', {
+        : await fetch('https://iwb-cloud-app.onrender.com/api/services', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export default function AddService() {
 
   const fetchServices = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/services');
+      const response = await fetch('https://iwb-cloud-app.onrender.com/api/services');
       const data = await response.json();
       setServices(data);
     } catch (error) {
@@ -66,7 +66,7 @@ export default function AddService() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/services/${id}`, {
+      const response = await fetch(`https://iwb-cloud-app.onrender.com/api/services/${id}`, {
         method: 'DELETE',
       });
 

@@ -16,7 +16,7 @@ const QueriesPage = () => {
   useEffect(() => {
     const fetchQueries = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/queries');
+        const response = await fetch('https://iwb-cloud-app.onrender.com/api/queries');
         const data = await response.json();
         setQueries(data);
       } catch (error) {
@@ -40,7 +40,7 @@ const QueriesPage = () => {
 
   const handleMarkAsResolved = async (query) => {
     try {
-      await fetch(`http://localhost:5000/api/queries/${query._id}`, {
+      await fetch(`https://iwb-cloud-app.onrender.com/api/queries/${query._id}`, {
         method: 'PUT',
         body: JSON.stringify({ response }),
         headers: { 'Content-Type': 'application/json' },
@@ -53,7 +53,7 @@ const QueriesPage = () => {
       setResponse('');
 
       // Send email after marking as resolved
-      await fetch(`http://localhost:5000/api/queries/send-response/${query._id}`, {
+      await fetch(`https://iwb-cloud-app.onrender.com/api/queries/send-response/${query._id}`, {
         method: 'POST',
         body: JSON.stringify({
           email: query.email,
@@ -71,7 +71,7 @@ const QueriesPage = () => {
 
   const handleAutoResolve = async (query) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/queries/auto-resolve/${query._id}`, {
+      const response = await fetch(`https://iwb-cloud-app.onrender.com/api/queries/auto-resolve/${query._id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -91,7 +91,7 @@ const QueriesPage = () => {
 
   const handleDeleteQuery = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/queries/${id}`, { method: 'DELETE' });
+      await fetch(`https://iwb-cloud-app.onrender.com/api/queries/${id}`, { method: 'DELETE' });
       setQueries(queries.filter(query => query._id !== id));
     } catch (error) {
       console.error('Error deleting query:', error);

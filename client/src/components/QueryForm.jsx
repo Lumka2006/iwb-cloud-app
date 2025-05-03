@@ -8,7 +8,7 @@ export default function QueryForm() {
     e.preventDefault();
     
     // Send query to backend
-    const res = await fetch('http://localhost:5000/api/queries', {
+    const res = await fetch('https://iwb-cloud-app.onrender.com/api/queries', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),

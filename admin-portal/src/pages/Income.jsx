@@ -17,7 +17,7 @@ const Income = () => {
   useEffect(() => {
     const fetchIncome = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/income');
+        const response = await fetch('https://iwb-cloud-app.onrender.com/api/income');
         if (!response.ok) throw new Error('Failed to fetch income');
         const data = await response.json();
         setMonthlyIncome(data);
@@ -33,7 +33,7 @@ const Income = () => {
   const handleSaveExpenses = async () => {
     setSaving(true);
     try {
-      const response = await fetch('http://localhost:5000/api/expenses', {
+      const response = await fetch('https://iwb-cloud-app.onrender.com/api/expenses', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ expenses })

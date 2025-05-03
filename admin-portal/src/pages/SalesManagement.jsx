@@ -8,7 +8,7 @@ const SalesManagement = () => {
 
   const fetchPurchases = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/purchase', {
+      const res = await fetch('https://iwb-cloud-app.onrender.com/api/purchase', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,

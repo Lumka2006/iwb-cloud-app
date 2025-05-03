@@ -17,10 +17,10 @@ const ViewIncomeStatement = () => {
     try {
       const token = localStorage.getItem('token');
       const [incomeRes, expenseRes] = await Promise.all([
-        fetch('http://localhost:5000/api/income', {
+        fetch('https://iwb-cloud-app.onrender.com/api/income', {
           headers: { 'Authorization': `Bearer ${token}` }
         }),
-        fetch('http://localhost:5000/api/expenses', {
+        fetch('https://iwb-cloud-app.onrender.com/api/expenses', {
           headers: { 'Authorization': `Bearer ${token}` }
         })
       ]);
