@@ -17,6 +17,10 @@ app.use(express.json());
 // MongoDB URI and JWT Secret
 const MONGO_URI = 'mongodb+srv://Lumka:LumkaMdandy%402006@cluster0.jna9oja.mongodb.net/IBW';
 const JWT_SECRET = 'your_secret_key';
+EMAIL_USER='mdandalazalumka@gmail.com';
+EMAIL_PASS='hblx iozy eyps xyht';
+VITE_API_URL = 'https://iwb-cloud-app.onrender.com';
+
 
 // MongoDB Connection
 mongoose.connect(MONGO_URI)
