@@ -1,0 +1,14 @@
+{
+    "version": 2,
+    "builds": [
+      { "src": "backend/server.js", "use": "@vercel/node" },
+      { "src": "client/vite.config.js", "use": "@vercel/static-build", "config": { "distDir": "client/dist" } },
+      { "src": "admin-portal/vite.config.js", "use": "@vercel/static-build", "config": { "distDir": "admin-portal/dist" } }
+    ],
+    "routes": [
+      { "src": "/api/(.*)", "dest": "/backend/server.js" },
+      { "src": "/admin/(.*)", "dest": "/admin-portal/dist/$1" },
+      { "src": "/(.*)", "dest": "/client/dist/$1" }
+    ]
+  }
+  
