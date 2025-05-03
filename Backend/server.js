@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB URI and JWT Secret
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_URI = 'mongodb+srv://Lumka:LumkaMdandy%402006@cluster0.jna9oja.mongodb.net/IBW';
 const JWT_SECRET = 'your_secret_key';
 
 // MongoDB Connection
