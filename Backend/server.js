@@ -850,42 +850,6 @@ app.put('/api/queries/:id', async (req, res) => {
   }
 });
 
-app.post('/api/backup', async (req, res) => {
-  try {
-    const purchases = await Purchase.find({});
-    if (purchases.length === 0) {
-      return res.status(404).json({ message: 'No purchases to backup' });
-    }
-
-    const backup = new Backup({
-      createdAt: new Date(),
-      data: purchases,
-    });
-
-    await backup.save();
-    res.status(201).json({ message: 'Backup created successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Backup failed', error: error.message });
-  }
-});
-app.get('/api/backup', async (req, res) => {
-  try {
-    // Fetch all backups from the database
-    const backups = await Backup.find({});
-
-    // If there are no backups, return a 404 response
-    if (backups.length === 0) {
-      return res.status(404).json({ message: 'No backups found' });
-    }
-
-    // Return the backups in the response
-    res.status(200).json(backups);
-  } catch (error) {
-    // If there's an error, return a 500 response with the error message
-    res.status(500).json({ message: 'Failed to retrieve backups', error: error.message });
-  }
-});
-
 
 
 // Start Server
