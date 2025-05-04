@@ -19,7 +19,7 @@ const MONGO_URI = 'mongodb+srv://Lumka:LumkaMdandy%402006@cluster0.jna9oja.mongo
 const JWT_SECRET = 'your_secret_key';
 const EMAIL_USER='mdandalazalumka@gmail.com';
 const EMAIL_PASS='hblx iozy eyps xyht';
-VITE_API_URL = 'https://iwb-cloud-app.onrender.com';
+const VITE_API_URL = 'https://iwb-cloud-app.onrender.com';
 
 
 // MongoDB Connection
