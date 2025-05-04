@@ -17,8 +17,8 @@ app.use(express.json());
 // MongoDB URI and JWT Secret
 const MONGO_URI = 'mongodb+srv://Lumka:LumkaMdandy%402006@cluster0.jna9oja.mongodb.net/IBW';
 const JWT_SECRET = 'your_secret_key';
-EMAIL_USER='mdandalazalumka@gmail.com';
-EMAIL_PASS='hblx iozy eyps xyht';
+const EMAIL_USER='mdandalazalumka@gmail.com';
+const EMAIL_PASS='hblx iozy eyps xyht';
 VITE_API_URL = 'https://iwb-cloud-app.onrender.com';
 
 
@@ -600,13 +600,13 @@ app.post('/api/queries/send-response/:id', async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: EMAIL_USER,
+        pass: EMAIL_PASS,
       },
     });
 
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: EMAIL_USER,
       to: email,
       subject: `Response to your query, ${name}`,
       text: `Dear ${name},\n\n${response}\n\nBest regards,\nSupport Team`,
@@ -660,13 +660,13 @@ app.post('/api/queries/auto-resolve/:id', async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: EMAIL_USER,
+        pass: EMAIL_PASS,
       },
     });
 
     const mailOptions = {
-      from: `"IWB Auto-Responder" <${process.env.EMAIL_USER}>`,
+      from: `"IWB Auto-Responder" <${EMAIL_USER}>`,
       to: email,
       subject: `Query Resolution - IWB Support`,
       text: `Dear ${name},\n\n${autoResponse}\n\nBest regards,\nIWB Support Team`,
