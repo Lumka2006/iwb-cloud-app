@@ -1,9 +1,15 @@
-runtime: nodejs20
-instance_class: F1
+runtime: nodejs16  # Use Node.js runtime
+
+env: flex  # Use the flexible environment
 
 env_variables:
-  NODE_ENV: "production"
+  MONGO_URI: "Ymongodb+srv://Lumka:LumkaMdandy%402006@cluster0.jna9oja.mongodb.net/IBW"  # MongoDB Atlas connection
 
 handlers:
-  - url: /.*
-    script: auto
+  - url: /static
+    static_dir: client/build/static  # Serve static files from React build
+  - url: /
+    static_files: client/build/index.html  # Route all other URLs to React's index.html
+    upload: client/build/index.html
+  - url: /api/*
+    script: auto  # This will route all /api/* requests to the backend
