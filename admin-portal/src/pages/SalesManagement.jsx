@@ -5,6 +5,8 @@ const SalesManagement = () => {
   const [purchases, setPurchases] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [backupMessage, setBackupMessage] = useState('');
+  const [backups, setBackups] = useState([]);  // State to store backups
 
   const fetchPurchases = async () => {
     try {
@@ -28,18 +30,108 @@ const SalesManagement = () => {
     }
   };
 
+  const fetchBackups = async () => {
+    try {
+      const res = await fetch('https://iwb-cloud-app.onrender.com/api/backup', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch backups');
+      }
+
+      const data = await res.json();
+      setBackups(data);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleBackup = async () => {
+    try {
+      setBackupMessage('Backing up sales data...');
+      const res = await fetch('https://iwb-cloud-app.onrender.com/api/backup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) throw new Error(result.message || 'Backup failed');
+
+      setBackupMessage('✅ Backup completed successfully!');
+    } catch (err) {
+      setBackupMessage(`❌ Backup failed: ${err.message}`);
+    }
+
+    setTimeout(() => setBackupMessage(''), 5000); // Hide message after 5 seconds
+  };
+
   useEffect(() => {
     fetchPurchases();
+    fetchBackups(); // Fetch backups when component mounts
   }, []);
 
-  if (loading) return <p style={{ textAlign: 'center', color: '#4A5568', marginTop: '2.5rem' }}>Loading purchase history...</p>;
-  if (error) return <p style={{ textAlign: 'center', color: '#F56565', marginTop: '2.5rem' }}>Error: {error}</p>;
+  if (loading)
+    return <p style={{ textAlign: 'center', color: '#4A5568', marginTop: '2.5rem' }}>Loading purchase history...</p>;
+
+  if (error)
+    return <p style={{ textAlign: 'center', color: '#F56565', marginTop: '2.5rem' }}>Error: {error}</p>;
 
   return (
     <div>
       <Navbar />
       <div style={{ maxWidth: '1024px', margin: '0 auto', padding: '2rem' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#2D3748', marginBottom: '1.5rem', borderBottom: '2px solid #EDF2F7', paddingBottom: '0.5rem' }}>Purchase History</h2>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: '600', color: '#2D3748', marginBottom: '1.5rem', borderBottom: '2px solid #EDF2F7', paddingBottom: '0.5rem' }}>
+          Purchase History
+        </h2>
+
+        {/* Backup Button */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+          <button
+            onClick={handleBackup}
+            style={{
+              backgroundColor: '#3182CE',
+              color: '#FFF',
+              padding: '0.5rem 1rem',
+              border: 'none',
+              borderRadius: '0.375rem',
+              cursor: 'pointer',
+              fontWeight: '500',
+            }}
+          >
+            Backup Sales Data
+          </button>
+        </div>
+
+        {/* Backup Status Message */}
+        {backupMessage && (
+          <p style={{ textAlign: 'right', color: '#2B6CB0', marginBottom: '1rem', fontWeight: '500' }}>
+            {backupMessage}
+          </p>
+        )}
+
+        {/* List of Backups */}
+        <h3 style={{ color: '#2D3748', marginTop: '2rem', fontSize: '1.25rem' }}>Backups</h3>
+        {backups.length === 0 ? (
+          <p style={{ color: '#A0AEC0', textAlign: 'center' }}>No backups available.</p>
+        ) : (
+          <ul style={{ paddingLeft: '1.5rem' }}>
+            {backups.map((backup, index) => (
+              <li key={index} style={{ color: '#4A5568', fontSize: '1rem' }}>
+                {backup.name} - {new Date(backup.createdAt).toLocaleString()}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Purchase Table */}
         {purchases.length === 0 ? (
           <p style={{ color: '#A0AEC0', textAlign: 'center' }}>No purchases found.</p>
         ) : (
@@ -82,5 +174,7 @@ const SalesManagement = () => {
     </div>
   );
 };
+
+
 
 export default SalesManagement;
