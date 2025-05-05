@@ -34,8 +34,11 @@ const Login = () => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '100vh',
+      minHeight: '100vh',
+      width: '100vw',
       background: 'linear-gradient(to right, #f8f9fa, #e0eafc)',
+      boxSizing: 'border-box',
+      padding: '1rem'
     }}>
       <div style={{
         backgroundColor: '#ffffff',

@@ -31,10 +31,14 @@ const Register = () => {
 
   return (
     <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '100vh',
       background: 'linear-gradient(to right, #fdfbfb, #ebedee)',
     }}>
       <div style={{
@@ -45,6 +49,7 @@ const Register = () => {
         borderRadius: '16px',
         boxShadow: '0 8px 20px rgba(0, 0, 0, 0.1)',
       }}>
+  
         <h2 style={{
           textAlign: 'center',
           marginBottom: '1.5rem',
